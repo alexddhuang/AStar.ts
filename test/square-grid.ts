@@ -1,4 +1,4 @@
-import { Node, Graph } from "./graph";
+import { Node, Graph } from "../dist/graph";
 
 export class Location implements Node {
     public x: number;
@@ -11,11 +11,11 @@ export class Location implements Node {
 }
 
 export class SquareGrid implements Graph {
-    private width: number;
-    private height: number;
-    private walls: Location[];
+    protected width: number;
+    protected height: number;
+    protected walls: Location[];
 
-    constructor(width: number, height: number) {
+    constructor(width?: number, height?: number) {
         this.width = width;
         this.height = height;
         this.walls = [];
