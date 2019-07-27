@@ -14,6 +14,7 @@ export class AbstractGraph {
     public build(edges: [AbstractNode, AbstractNode][]) {
         edges.forEach(edge => {
             this.addEdge(edge);
+            this.addEdge([edge[1], edge[0]]);
         });
     }
 
@@ -45,7 +46,5 @@ export class AbstractGraph {
         } else {
             this.graph.set(a, [b]);
         }
-
-        this.addEdge([b, a]);
     }
 }
