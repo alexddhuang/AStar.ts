@@ -1,19 +1,21 @@
+import { Queue } from "./structures";
+
 export function BreadthFirstSearch(graph, start, goal) {
     const frontier = new Queue();
-    frontier.put(start);
+    frontier.push(start);
 
     const cameFrom = {};
     cameFrom[start.id()] = null;
 
     while (!frontier.empty()) {
-        const current = frontier.get();
+        const current = frontier.pop();
 
         if (current.id() == goal.id())
             break;
 
         for (let next of graph.neighbors(current)) {
             if (!(next.id() in cameFrom)) {
-                frontier.put(next);
+                frontier.push(next);
                 cameFrom[next.id()] = current;
             }
         }
