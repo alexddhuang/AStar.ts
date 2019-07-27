@@ -1,11 +1,12 @@
 import { Queue } from "./structures";
+import { AbstractNode, AbstractGraph } from "./graph";
 
-export function BreadthFirstSearch(graph, start, goal) {
+export function BreadthFirstSearch(graph: AbstractGraph, start: AbstractNode, goal: AbstractNode) {
     const frontier = new Queue();
     frontier.put(start);
 
-    const came_from = {};
-    came_from[start] = null;
+    const came_from = new Map();
+    came_from.set(start, null);
 
     // expanding the frontier
     while (!frontier.empty()) {
@@ -27,7 +28,7 @@ export function BreadthFirstSearch(graph, start, goal) {
     const path = [];
     while (current != start) {
         path.unshift(current);
-        current = came_from[current];
+        current = came_from.get(current);
     }
     path.unshift(current);
 

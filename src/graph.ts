@@ -1,5 +1,6 @@
 export class AbstractNode {
     public cost: number = 0;
+    public passable: boolean = true;
 }
 
 export class AbstractGraph {
@@ -14,6 +15,15 @@ export class AbstractGraph {
         edges.forEach(edge => {
             this.addEdge(edge);
         });
+    }
+
+    public neighbors(node: AbstractNode): AbstractNode[] {
+        const ret = [];
+        const nodes = this.graph.get(node);
+        nodes.forEach(node => {
+            if (node.passable) ret.push(node);
+        });
+        return ret;
     }
 
     private addEdge(edge: [AbstractNode, AbstractNode]) {
