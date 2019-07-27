@@ -1,6 +1,7 @@
 import { Queue } from "./structures";
+import { Node, Graph } from "./graph";
 
-export function BreadthFirstSearch(graph, start, goal) {
+export function BreadthFirstSearch(graph: Graph, start: Node, goal: Node) {
     const frontier = new Queue();
     frontier.push(start);
 
