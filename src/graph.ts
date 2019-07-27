@@ -18,6 +18,10 @@ export class AbstractGraph {
         });
     }
 
+    /**
+     * Get the neighbors of a node (impassable nodes are not included).
+     * @param node 
+     */
     public neighbors(node: AbstractNode): AbstractNode[] {
         const ret = [];
         const nodes = this.graph.get(node);
