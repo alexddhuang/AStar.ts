@@ -1,5 +1,6 @@
 import { DrawableGrid } from "./grid-drawable";
-import { BreadthFirstSearch } from "../dist/algorithms";
+import { Cell } from "./grid";
+import { BreadthFirstSearch, BuildPath } from "../dist/algorithms";
 
 const grid = new DrawableGrid;
 grid.buildFromFile("grid.txt", () => {
@@ -13,4 +14,9 @@ grid.buildFromFile("grid.txt", () => {
 
     const cameFrom = BreadthFirstSearch(grid, grid.cell(start), grid.cell(goal));
     grid.draw(start, goal, cameFrom);
+    console.log(`-----------------------------------------------------\n`);
+
+    const path = BuildPath(cameFrom, grid.cell(start), grid.cell(goal));
+    grid.draw(start, goal, cameFrom, <Cell[]>path);
+
 });

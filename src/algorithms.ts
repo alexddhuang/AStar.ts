@@ -24,3 +24,13 @@ export function BreadthFirstSearch(graph: Graph, start: Node, goal: Node) {
 
     return cameFrom;
 }
+
+export function BuildPath(cameFrom: Object, start: Node, goal: Node): Node[] {
+    const path = [];
+    let current = goal;
+    while (current.id() != start.id()) {
+        path.unshift(current);
+        current = cameFrom[current.id()];
+    }
+    return path;
+}

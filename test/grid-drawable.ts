@@ -35,7 +35,7 @@ export class DrawableGrid extends Grid {
         });
     }
 
-    public draw(start?: [number, number], goal?: [number, number], cameFrom?: Object) {
+    public draw(start?: [number, number], goal?: [number, number], cameFrom?: Object, path?: Cell[]) {
         for (let y = 0; y < this.height; y++) {
             for (let x = 0; x < this.width; x++) {
                 const cell = this.cells[y][x];
@@ -43,11 +43,23 @@ export class DrawableGrid extends Grid {
                     if (start && start[0] == x && start[1] == y) process.stdout.write("A ");
                     else if (goal && goal[0] == x && goal[1] == y) process.stdout.write("Z ");
                     else if (cameFrom && cameFrom[cell.id()]) {
-                        const prev: Cell = cameFrom[cell.id()];
-                        if      (prev.x == x && prev.y < y) process.stdout.write("v ");
-                        else if (prev.x < x && prev.y == y) process.stdout.write("> ");
-                        else if (prev.x == x && prev.y > y) process.stdout.write("^ ");
-                        else if (prev.x > x && prev.y == y) process.stdout.write("< ");
+                        let inPath = false;
+                        if (path) {
+                            for (let p of path) {
+                                if (cell.id() == p.id()) {
+                                    inPath = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (inPath) process.stdout.write("* ");
+                        else {
+                            const prev: Cell = cameFrom[cell.id()];
+                            if      (prev.x == x && prev.y < y) process.stdout.write("v ");
+                            else if (prev.x < x && prev.y == y) process.stdout.write("> ");
+                            else if (prev.x == x && prev.y > y) process.stdout.write("^ ");
+                            else if (prev.x > x && prev.y == y) process.stdout.write("< ");
+                        }
                     } else process.stdout.write(". ");
                 } else process.stdout.write("##");
             }
