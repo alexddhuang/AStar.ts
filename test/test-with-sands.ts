@@ -1,6 +1,6 @@
 import { DrawableGrid } from "./grid-drawable";
 import { Cell } from "./grid";
-import { BreadthFirstSearch, BuildPath, DijkstraSearch } from "../dist/algorithms";
+import { BreadthFirstSearch, BuildPath, DijkstraSearch, AStarSearch } from "../dist/algorithms";
 
 const grid = new DrawableGrid;
 grid.buildFromFile("grid-with-sands.txt", () => {
@@ -18,5 +18,9 @@ grid.buildFromFile("grid-with-sands.txt", () => {
 
     const path = BuildPath(cameFrom, grid.cell(start), grid.cell(goal));
     grid.draw(start, goal, cameFrom, <Cell[]>path);
+    console.log(`-----------------------------------------------------\n`);
 
+    const cameFrom2 = AStarSearch(grid, grid.cell(start), grid.cell(goal));
+    const path2 = BuildPath(cameFrom2, grid.cell(start), grid.cell(goal));
+    grid.draw(start, goal, cameFrom2, <Cell[]>path2);
 });

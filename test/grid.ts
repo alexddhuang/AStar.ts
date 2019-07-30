@@ -53,6 +53,10 @@ export class Grid implements Graph {
         return next.weight;
     }
 
+    public heuristic(a: Cell, b: Cell): number {
+        return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
+    }
+
     protected inBounds(x: number, y: number): boolean {
         return 0 <= x && x < this.width && 0 <= y && y < this.height;
     }
