@@ -5,12 +5,14 @@ export class Cell implements Node {
     public x: number;
     public y: number;
     public passable: boolean;
+    public weight: number;
 
-    constructor(id: number, x: number, y: number, passable: boolean) {
+    constructor(id: number, x: number, y: number, passable: boolean, weight?: number) {
         this._id = id;
         this.x = x;
         this.y = y;
         this.passable = passable;
+        this.weight = weight ? weight : 0;
     }
 
     public id(): number {
@@ -45,6 +47,10 @@ export class Grid implements Graph {
         });
 
         return results;
+    }
+
+    public cost(current: Cell, next: Cell): number {
+        return next.weight;
     }
 
     protected inBounds(x: number, y: number): boolean {

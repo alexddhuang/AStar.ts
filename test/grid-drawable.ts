@@ -26,7 +26,7 @@ export class DrawableGrid extends Grid {
                     const y = j;
                     const id = y * this.width + x;
                     const point = line.slice(i, i+2);
-                    const cell = new Cell(id, x, y, point == "##" ? false : true);
+                    const cell = new Cell(id, x, y, point == "##" ? false : true, point == "@ " ? 3 : 1);
                     row.push(cell);
                 }
             }
@@ -60,7 +60,8 @@ export class DrawableGrid extends Grid {
                             else if (prev.x == x && prev.y > y) process.stdout.write("^ ");
                             else if (prev.x > x && prev.y == y) process.stdout.write("< ");
                         }
-                    } else process.stdout.write(". ");
+                    } else if (cell.weight > 1) process.stdout.write("@ "); 
+                    else process.stdout.write(". ");
                 } else process.stdout.write("##");
             }
             process.stdout.write("\n");
